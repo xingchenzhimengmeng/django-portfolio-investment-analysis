@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>股票买卖</title>
+    <link rel="stylesheet" href="{% static 'buy.css' %}">
+</head>
+<body>
+<div class="navbar">
+        <a href="/user/index/">股票模拟交易系统</a>
+            <a href="/user/rank/">用户排名</a>
+            <a href="/user/index/">个人中心</a>
+    <a href="/user/analysis/" target="_blank">组合投资分析</a>
+            <a href="/user/buy/" target="_blank">股票买入</a>
+            <a href="/user/logout/">退出登录</a>
+        </div>
+<div class="container">
+    <h1>股票买入</h1>
+    <div>
+        <form method="get">
+            <input type="text" name="search_stock">
+            <button type="submit">搜索股票</button>
+        </form>
+        <a id="contentDisplay" target="_blank"></a>
+    </div>
+<div>
+        <form method="post">
+        {% csrf_token %}
+        <label for="code">股票:</label>
+        <select name="code" id="mySelect" class="select-box">
+            {% for stock in stocks %}
+                <option value="{{ stock.code }}">{{ stock.code }}:{{ stock.title }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="number">买入数量（手）:</label>
+        <input type="number" name="number"><br><br>
+        <button type="submit">买入</button>
+        </form>
+    <p>{{ tip }}</p>
+ </div>
+    <h3>可用资金：{{ obj.fund }}</h3>
+    </div>
+
+
+<script>
+// 获取select元素
+var selectElement = document.getElementById("mySelect");
+// 获取显示内容的元素
+var contentDisplay = document.getElementById("contentDisplay");
+contentDisplay.href = 'https://quote.cfi.cn/quote_'+selectElement.value+'.html';
+contentDisplay.textContent = '查看股票价格'+ selectElement.value;
+// 添加change事件监听器
+selectElement.addEventListener("change", function() {
+  // 根据选择的选项，设置不同的内容
+    contentDisplay.href = 'https://quote.cfi.cn/quote_'+selectElement.value+'.html';
+    contentDisplay.textContent = '查看当前股票价格：'+ selectElement.value;
+});
+</script>
+</body>
+</html>

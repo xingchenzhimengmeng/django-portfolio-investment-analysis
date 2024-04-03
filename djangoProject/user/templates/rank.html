@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资金排名</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/user/index/">股票模拟交易系统</a>
+            <a href="#">用户排名</a>
+            <a href="/user/index/">个人中心</a>
+        <a href="/user/analysis/" target="_blank">组合投资分析</a>
+            <a href="/user/buy/" target="_blank">股票买入</a>
+            <a href="/user/logout/">退出登录</a>
+        </div>
+
+<table class="transaction-table">
+    <thead>
+        <tr>
+            <th>排名</th>
+            <th>用户名</th>
+            <th>账号</th>
+            <th>资金</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in  all_users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.account }}</td>
+            <td>{{ user.fund }}</td>
+        </tr>
+        </form>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组合投资分析</title>
+    <link rel="stylesheet" href="{% static 'analysis.css' %}">
+</head>
+<body>
+<div class="navbar">
+        <a href="/user/index/">股票模拟交易系统</a>
+            <a href="/user/rank/">用户排名</a>
+            <a href="/user/index/">个人中心</a>
+    <a href="/user/analysis/" target="_blank">组合投资分析</a>
+            <a href="/user/buy/" target="_blank">股票买入</a>
+            <a href="/user/logout/">退出登录</a>
+        </div>
+<div class="container">
+    <h1>组合投资分析</h1>
+
+<div>
+        <form method="post">
+        {% csrf_token %}
+        <label for="code">请输入股票代码:</label>
+            <div id="input1">
+        <div id="input2">
+            <input type="number" name="number">
+        </div>
+                <div id="input2">
+            <input type="number" name="number">
+        </div>
+                <div id="input2">
+            <input type="number" name="number">
+        </div>
+</div>
+            <br><br>
+        <button type="submit">提交</button>
+        </form>
+    <button onclick="removeInput()" class="button">删除股票输入框</button>
+<button onclick="addInput()" class="button">添加股票输入框</button>
+    <p>注意：只有上证A股和深证A股可以获取数据！</p>
+    <p>{{ tip }}</p>
+ </div>
+</div>
+<script>
+function addInput() {
+  const container = document.getElementById('input1');
+  const newInput = document.createElement('div');
+  newInput.id = 'input2';
+  newInput.innerHTML = `
+    <input type="number" name="number">
+  `;
+  container.appendChild(newInput);
+}
+
+function removeInput() {
+  const container = document.getElementById('input2');
+  container.parentNode.removeChild(container);
+}
+</script>
+</body>
+</html>

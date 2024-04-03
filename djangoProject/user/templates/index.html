@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/user/index/">股票模拟交易系统</a>
+        <a href="/user/rank/">用户排名</a>
+        <a href="/user/index/">个人中心</a>
+        <a href="/user/analysis/" target="_blank">组合投资分析</a>
+        <a href="/user/buy/" target="_blank">股票买入</a>
+        <a href="/user/logout/">退出登录</a>
+    </div>
+    <div class="container">
+        <div class="left">
+        <div class="profile">
+            <h1>欢迎进入股票模拟交易系统, {{ obj.name }}！</h1>
+            <h3>可用资金:{{ obj.fund }}元</h3>
+        </div>
+            </div>
+    <div class="right">
+        <div class="profile">
+            <h1>个人信息</h1>
+            <p>账户: {{ obj.account }}</p>
+            <p>姓名: {{ obj.name }}</p>
+            <p>性别: {{ obj.get_gender_display }}</p>
+            <p>邮箱: {{ obj.email }}</p>
+            <p>手机: {{ obj.phone }}</p>
+        </div>
+        <a href="/user/edit/" target="_blank"><button class="edit-button">修改个人信息</button></a>
+    </div>
+    </div>
+    <h1 style="text-align: center;">持仓数据</h1>
+    <table class="transaction-table">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>股票代码</th>
+                <th>最近买入时间</th>
+                <th>买入均价</th>
+                <th>现价</th>
+                <th>k线图</th>
+                <th>持有数量（手）</th>
+                <th>持仓盈亏</th>
+                <th>持仓盈亏率</th>
+                <th>卖出数量（手）</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transition in transitions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ transition.code }}</td>
+                <td>{{ transition.buy_time }}</td>
+                <td>{{ transition.buy_price }}</td>
+                <td>{{ transition.now_price }}</td>
+                <td><span><a href="/user/k_image/{{ transition.code_id }}/" target="_blank">查看其k线图</a></span></td>
+                <td>{{ transition.number }}</td>
+                <td>{{ transition.profit }}</td>
+                <td>{{ transition.profit_ratio }}%</td>
+                <td>
+                    <form action="" method="post">{% csrf_token %}
+                        <input type="number" name="number" value="0" class="sell-input">
+                        <input type="hidden" name="transition_id" value="{{ transition.id }}">
+                        <button type="submit" class="sell-button">卖出</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

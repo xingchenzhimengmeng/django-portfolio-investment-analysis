@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑用户</title>
+    <link rel="stylesheet" href="{% static 'create.css' %}">
+</head>
+<body>
+<h1>编辑用户</h1>
+<form action="" method="post">
+    {% csrf_token %}
+          <ul>
+              <li>
+                <label for="account">账号:</label>
+                <input type="text" id="account" name="account" value="{{ obj.account }}" required/>
+            </li>
+            <li>
+                <label for="name">姓名:</label>
+                <input type="text" id="name" name="name" value="{{ obj.name }}" required/>
+            </li>
+            <li>
+                <label for="gender">性别:</label>
+                <select id="gender" name="gender" required>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </li>
+            <li>
+                <label for="email">电子邮箱:</label>
+                <input type="email" id="email" name="email" value="{{ obj.email }}" required/>
+            </li>
+            <li>
+                <label for="phone">手机:</label>
+                <input type="number" id="phone" name="phone" value="{{ obj.phone }}" required/>
+            </li>
+            <li>
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" value="{{ obj.password }}" required/>
+            </li>
+        </ul>
+    <button type="submit">提交</button>
+</form>
+</body>
+</html>

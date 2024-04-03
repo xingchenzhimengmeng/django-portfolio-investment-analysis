@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ code }}</title>
+    <link rel="stylesheet" href="{% static 'analysis_result.css' %}">
+</head>
+<body>
+<div class="navbar">
+        <a href="/user/index/">股票模拟交易系统</a>
+            <a href="/user/rank/">用户排名</a>
+            <a href="/user/index/">个人中心</a>
+    <a href="/user/analysis/" target="_blank">组合投资分析</a>
+            <a href="/user/buy/" target="_blank">股票买入</a>
+            <a href="/user/logout/">退出登录</a>
+        </div>
+<div class="container">
+    <h1>{{ code }}：k线图及交易量</h1>
+<img src="data:image/png;base64,{{ graphic }}" alt="金融数据图表">
+
+</div>
+
+</body>
+</html>

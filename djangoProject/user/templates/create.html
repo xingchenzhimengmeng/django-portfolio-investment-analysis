@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+  <link rel="stylesheet" href="{% static 'create.css' %}">
+</head>
+<body>
+    <h1>注册</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <ul>
+            <li>
+                <label for="account">账号:</label>
+                <input type="text" id="account" name="account" value="{{ account }}" required/>
+            </li>
+            <li>
+                <label for="name">姓名:</label>
+                <input type="text" id="name" name="name" value="{{ name }}" required/>
+            </li>
+            <li>
+                <label for="gender">性别:</label>
+                <select id="gender" name="gender" required>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </li>
+            <li>
+                <label for="email">电子邮箱:</label>
+                <input type="email" id="email" name="email" value="{{ email }}" required/>
+            </li>
+            <li>
+                <label for="phone">手机:</label>
+                <input type="number" id="phone" name="phone" value="{{ phone }}" required/>
+            </li>
+            <li>
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" value="{{ password }}" required/>
+            </li>
+        </ul>
+        <p> {{ tip }}</p>
+        <button type="submit">提交</button>
+    </form>
+</body>
+</html>
