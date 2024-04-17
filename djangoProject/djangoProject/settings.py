@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^!4ts=6rthr9yf8mnoxsykz22!v*t)phua(ldkt=vvi7hbvre7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -128,6 +128,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'app01', 'static'),
     os.path.join(BASE_DIR, 'user', 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'feng_static')    # 收集静态文件
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
